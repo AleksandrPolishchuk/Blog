@@ -1,9 +1,11 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { checkIsAuth, logout } from '../redux/features/auth/authSlice'
 
 export const Navbar = () => {
  
-    const isAuth = false;
+    const isAuth = useSelector();
 
     const activeStyles = {
         color: 'white',
