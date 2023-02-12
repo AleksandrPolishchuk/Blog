@@ -27,6 +27,15 @@ export const AddPostPage = () => {
           className='mt-1 text-black w-full rounded-lg bg-gray-400 border py-1 px-2 text-xs outline-none resize-none h-40 placeholder:text-gray-700'
         />
       </label>
+
+      <div className="flex gap-8 items-center justify-center mt-4">
+        <button className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'>
+          Добавить
+        </button>
+        <button className='flex justify-center items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4'>
+          Отменить
+        </button>
+      </div>
     </form>
   )
 }
