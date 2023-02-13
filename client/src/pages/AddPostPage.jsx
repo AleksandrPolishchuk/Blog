@@ -1,9 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createPost } from '../redux/features/post/postSlice';
 
 export const AddPostPage = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState('');
+
+  const dispatch = useDispatch();
 
   const submitHandler = () => {
     try {
@@ -11,6 +15,7 @@ export const AddPostPage = () => {
       data.append('title', title);
       data.append('text', text);
       data.append('image', image);
+      dispatch(createPost(data));
     } catch (error) {
       console.log(error)
     }
@@ -46,8 +51,10 @@ export const AddPostPage = () => {
       </label>
 
       <div className="flex gap-8 items-center justify-center mt-4">
-        <button className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'>
-          Добавить
+        <button
+          onClick={submitHandler} 
+          className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'>
+            Добавить
         </button>
         <button className='flex justify-center items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4'>
           Отменить
