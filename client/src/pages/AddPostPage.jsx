@@ -4,6 +4,17 @@ export const AddPostPage = () => {
   const [title, setTitle] = useState('');
   const [text, setText] = useState('');
   const [image, setImage] = useState('');
+
+  const submitHandler = () => {
+    try {
+      const data = new FormData()
+      data.append('title', title);
+      data.append('text', text);
+      data.append('image', image);
+    } catch (error) {
+      console.log(error)
+    }
+  }
   return (
     <form 
       className = 'w-1/3 mx-auto py-10'
