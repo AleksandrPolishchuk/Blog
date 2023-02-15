@@ -44,6 +44,19 @@ export const postSlice = createSlice({
     [createPost.rejected]: (state) => {
       state.loading = false;
     },
+
+    //Get All Posts
+    [getAllPosts.pending]: (state) => {
+      state.loading = true;
+    },
+    [getAllPosts.fulfilled]: (state, action) => {
+      state.loading = false;
+      state.posts = action.payload.posts;
+      state.popularPosts = action.payload.popularPosts;
+    },
+    [getAllPosts.rejected]: (state) => {
+      state.loading = false;
+    },
   },
 });
 
