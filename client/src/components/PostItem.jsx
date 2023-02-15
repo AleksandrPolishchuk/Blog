@@ -9,6 +9,7 @@ export const PostItem = () => {
             <div className="text-xs text-white opacity-50">DATA</div>
         </div>
         <div className="text-white text-xl">POST TITLE</div>
+        <p className="text-white opacity-60 text-xs pt-4">POST TEXT</p>
     </div>
   )
 }
