@@ -12,7 +12,7 @@ export const PostItem = () => {
         <div className="text-white text-xl">POST TITLE</div>
         <p className="text-white opacity-60 text-xs pt-4">POST TEXT</p>
 
-        <div className="flex gap-3 items-center">
+        <div className="flex gap-3 items-center mt-2">
           <button className = 'flex items-center justify-center gap-2 text-xs text-white opacity-50'>
             <AiFillEye /> <span>0</span>
           </button>
