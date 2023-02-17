@@ -1,8 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { PopularPosts } from '../components/PopularPosts'
 import { PostItem } from '../components/PostItem'
+import { useSelector, useDispatch } from 'react-redux'
 
 export const MainPage = () => {
+
+  const dispatch = useDispatch();
+  const { posts, popiularPosts } = useSelector((state) => state.post);
+
+  useEffect(() => {
+    dispatch(getAllPosts())
+  }, [dispatch]);
+
   return (
     <div className = 'max-w-[900px] mx-auto py-10'>
       <div className="flex justify-between gap-8">
