@@ -13,19 +13,34 @@ export const MainPage = () => {
     dispatch(getAllPosts())
   }, [dispatch]);
 
+  if (!posts.length) {
+    return (
+      <div className='text-xl text-center text-white py-10'>
+        Потов не существует.
+      </div>
+    )
+  }
+
   return (
     <div className = 'max-w-[900px] mx-auto py-10'>
       <div className="flex justify-between gap-8">
         <div className="flex flex-col gap-10 basis-4/5">
-          <PostItem />
-          <PostItem />
-          <PostItem />
+          {
+            posts?.map((post, idx) => (
+            <PostItem key={idx} post={post} />
+          ))}
           <PostItem />
         </div>
         <div className="basis-1/5">
           <div className="text-xs uppercase text-white">
             Популярное:
           </div>
+
+          {
+            PopularPosts?.map((post, idx) => (
+              <PopularPosts key={idx} post={post} />
+          ))}
+
           <PopularPosts />
           <PopularPosts />
           <PopularPosts />
