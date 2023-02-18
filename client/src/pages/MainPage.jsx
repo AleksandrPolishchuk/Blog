@@ -29,7 +29,6 @@ export const MainPage = () => {
             posts?.map((post, idx) => (
             <PostItem key={idx} post={post} />
           ))}
-          <PostItem />
         </div>
         <div className="basis-1/5">
           <div className="text-xs uppercase text-white">

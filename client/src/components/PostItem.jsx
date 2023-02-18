@@ -13,7 +13,19 @@ export const PostItem = ({ post }) => {
 
   return (
     <div className="flex flex-col basis-1/4 flex-grow">
-        <div>IMAGE</div>
+        <div 
+          className={
+            post.imgUrl ? 'flex rounded-sm h-80' : 'flex rounded-sm'
+          }
+        >
+          {post.imgUrl && (
+            <img 
+              src={`http://localhost:3002/${post.imgUrl}`}
+              alt='img'
+              className='object-cover w-full'
+            />
+          )}
+        </div>
         <div className="flexjustify-between items-center pt-2">
             <div className="text-xs text-white opacity-50">
               { post.username }
@@ -30,7 +42,7 @@ export const PostItem = ({ post }) => {
             <AiFillEye /> <span>{ post.views }</span>
           </button>
           <button className='flex items-center justify-center gap-2 text-xs text-white opacity-50'>
-            <AiOutlineMessage /> <span>{ post.comments?.length }</span>
+            <AiOutlineMessage /> <span>{ post.comments?.length || 0}</span>
           </button>
         </div>
     </div>
