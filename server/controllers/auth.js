@@ -1,5 +1,6 @@
 import User from "../models/User";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // Register user
 export const register = async (req, res) => {
@@ -50,6 +51,20 @@ export const login = async (req, res) => {
         message: "Неверный пароль.",
       });
     }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
+    res.json({
+      token,
+      user,
+      message: "вы вошли в систему.",
+    });
   } catch (error) {
     res.json({ message: "Ошибка при авторизации." });
   }
