@@ -33,6 +33,7 @@ export const register = async (req, res) => {
     res.json({ message: "Ошибка при создании пользователя." });
   }
 };
+
 // Login user
 export const login = async (req, res) => {
   try {
@@ -69,6 +70,7 @@ export const login = async (req, res) => {
     res.json({ message: "Ошибка при авторизации." });
   }
 };
+
 // Get me
 export const getme = async (req, res) => {
   try {
