@@ -61,3 +61,16 @@ export const getAll = async (req, res) => {
     res.json({ message: "Что-то пошло не так." });
   }
 };
+
+// Get By Id
+export const getById = async (req, res) => {
+  try {
+    const post = await Post.findOneAndUpdate(req.params.Id, {
+      $ins: { views: 1 },
+    });
+
+    res.json(post);
+  } catch (error) {
+    res.json({ message: "Что-то пошло не так." });
+  }
+};
