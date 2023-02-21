@@ -3,6 +3,7 @@ import User from "../models/User.js";
 import path, { dirname } from "path";
 import { fileURLToPath } from "url";
 
+// Create Post
 export const createPost = async (req, res) => {
   try {
     const { title, text } = req.body;
@@ -41,6 +42,21 @@ export const createPost = async (req, res) => {
       $push: { posts: newPostWithoutImage },
     });
     res.json(newPostWithoutImage);
+  } catch (error) {
+    res.json({ message: "Что-то пошло не так." });
+  }
+};
+
+// Get All Posts
+export const getAll = async (req, res) => {
+  try {
+    const posts = await Post.find().sort("-createdAt");
+    const popularPosts = await Post.find().limit(5).sort("-views");
+    if (!posts) {
+      return res.json({ message: "Постов нет" });
+    }
+
+    res.json({ posts, popularPosts });
   } catch (error) {
     res.json({ message: "Что-то пошло не так." });
   }
