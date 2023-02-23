@@ -26,7 +26,7 @@ export const PostItem = ({ post }) => {
             />
           )}
         </div>
-        <div className="flexjustify-between items-center pt-2">
+        <div className="flex justify-between items-center pt-2">
             <div className="text-xs text-white opacity-50">
               { post.username }
             </div>
