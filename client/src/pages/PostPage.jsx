@@ -1,13 +1,36 @@
-import React from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { AiFillEye, AiOutlineMessage } from 'react-icons/ai';
 import Moment from 'react-moment';
+import {useParams, Link } from 'react-router-dom';
+
+import axios from '../utils/axios';
 
 export const PostPage = () => {
-  const post = 'res';
+  const [post, setPost] = useState(null);
+  const params = useParams();
+
+  const fetchPost = useCallback(async () => {
+    const { data } = await axios.get(`/post/${params.id}`);
+    setPost(data);
+  }, [params.id]);
+
+  useEffect(() => {
+    fetchPost()
+  }, [fetchPost]);
+
+  if (!post) {
+    return (
+    <div className="text-xl text-center text-white py-10">
+      Загрузка...
+    </div>
+    )
+  }
   return (
     <div>
       <button className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'>
-        Назад
+        <Link className='flex' to='/'>
+          Назад
+        </Link>
       </button>
 
       <div className='flex gap-10 py-8'>
