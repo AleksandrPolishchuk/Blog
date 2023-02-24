@@ -1,13 +1,25 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import { AiFillEye, AiOutlineMessage } from 'react-icons/ai';
+import { AiFillEye, AiOutlineMessage, AiTwotoneEdit, AiFillDelete } from 'react-icons/ai';
 import Moment from 'react-moment';
 import {useParams, Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import axios from '../utils/axios';
 
 export const PostPage = () => {
   const [post, setPost] = useState(null);
+
+  const { user } = useSelector(state => state.auth);
   const params = useParams();
+  const dispatch = useDispatch();
+
+  const removePostHandler = () => {
+    try {
+      dispatch(removePost(params.id))
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const fetchPost = useCallback(async () => {
     const { data } = await axios.get(`/post/${params.id}`);
@@ -64,13 +76,31 @@ export const PostPage = () => {
           <div className="text-white text-xl">{ post.title }</div>
           <p className="text-white opacity-60 text-xs pt-4">{ post.text }</p>
 
-          <div className="flex gap-3 items-center mt-2">
-            <button className = 'flex items-center justify-center gap-2 text-xs text-white opacity-50'>
-              <AiFillEye /> <span>{ post.views }</span>
-            </button>
-            <button className='flex items-center justify-center gap-2 text-xs text-white opacity-50'>
-              <AiOutlineMessage /> <span>{ post.comments?.length || 0}</span>
-            </button>
+          <div className="flex gap-3 items-center mt-2 justify-between">
+            <div className='flex gap-3 mt-4'>
+              <button className = 'flex items-center justify-center gap-2 text-xs text-white opacity-50'>
+                <AiFillEye /> <span>{ post.views }</span>
+              </button>
+              <button className='flex items-center justify-center gap-2 text-xs text-white opacity-50'>
+                <AiOutlineMessage /> <span>{ post.comments?.length || 0}</span>
+              </button>
+            </div>
+
+            {
+              user?._id === post.author && (
+                <div className='flex gap-3 mt-4'>
+                  <button className = 'flex items-center justify-center gap-2 text-white opacity-50'>
+                    <AiTwotoneEdit />
+                  </button>
+                  <button
+                  onClick={removePostHandler}
+                  className='flex items-center justify-center gap-2 text-white opacity-50'>
+                    <AiFillDelete />
+                  </button>
+                </div>
+              )
+            }
+            
           </div>
 
         </div>
