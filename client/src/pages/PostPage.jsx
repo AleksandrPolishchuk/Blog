@@ -1,21 +1,26 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { AiFillEye, AiOutlineMessage, AiTwotoneEdit, AiFillDelete } from 'react-icons/ai';
 import Moment from 'react-moment';
-import {useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import { toast } from 'react-toasify';
 
 import axios from '../utils/axios';
+import { removePost } from '../redux/features/post/postSlice';
 
 export const PostPage = () => {
   const [post, setPost] = useState(null);
 
   const { user } = useSelector(state => state.auth);
+  const navigate = useNavigate()
   const params = useParams();
   const dispatch = useDispatch();
 
   const removePostHandler = () => {
     try {
-      dispatch(removePost(params.id))
+      dispatch(removePost(params.id));
+      toast('Пост был удален');
+      navigate('/posts');
     } catch (error) {
       console.log(error);
     }
