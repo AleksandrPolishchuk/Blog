@@ -4,6 +4,7 @@ import axios from '../utils/axios';
 
 export const PostsPage = () => {
   const [posts, setPosts] = useState([]);
+
   const fetchMyPosts = async () => {
     try {
       const { data } = await axios.get('/posts/user/me');

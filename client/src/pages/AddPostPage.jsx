@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import{ useNavigate } from 'react-router-dom';
 import { createPost } from '../redux/features/post/postSlice';
 
 export const AddPostPage = () => {
@@ -8,6 +9,7 @@ export const AddPostPage = () => {
   const [image, setImage] = useState('');
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const submitHandler = () => {
     try {
@@ -16,10 +18,17 @@ export const AddPostPage = () => {
       data.append('text', text);
       data.append('image', image);
       dispatch(createPost(data));
+      navigate('/');
     } catch (error) {
       console.log(error)
     }
   }
+
+  const clearFormHandler = () => {
+    setText('')
+    setTitle('')
+}
+
   return (
     <form 
       className = 'w-1/3 mx-auto py-10'
@@ -60,7 +69,9 @@ export const AddPostPage = () => {
           className='flex justify-center items-center bg-gray-600 text-xs text-white rounded-sm py-2 px-4'>
             Добавить
         </button>
-        <button className='flex justify-center items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4'>
+        <button
+          onClick={clearFormHandler}
+          className='flex justify-center items-center bg-red-500 text-xs text-white rounded-sm py-2 px-4'>
           Отменить
         </button>
       </div>
