@@ -5,6 +5,7 @@ import {
   getById,
   getMyPosts,
   removePost,
+  updatePost,
 } from "../controllers/posts.js";
 import { checkAuth } from "../utils/checkAuth.js";
 const router = new Router();
@@ -20,6 +21,10 @@ router.get("/", getAll);
 // Get Post by Id
 // http://localhost:3002/api/posts/:id
 router.get("/:id", getById);
+
+// Update Post
+// http://localhost:3002/api/posts/:id
+router.put("/:id", checkAuth, updatePost);
 
 // Get My Posts
 // http://localhost:3002/api/posts/user/me
