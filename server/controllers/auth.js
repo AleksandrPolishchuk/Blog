@@ -1,4 +1,4 @@
-import User from "../models/User";
+import User from "../models/User.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -23,11 +23,20 @@ export const register = async (req, res) => {
       password: hash,
     });
 
+    const token = jwt.sign(
+      {
+        id: newUser._id,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: "30d" }
+    );
+
     await newUser.save();
 
     res.json({
       newUser,
-      message: "Регистрация прошла успешно",
+      token,
+      message: "Регистрация прошла успешно.",
     });
   } catch (error) {
     res.json({ message: "Ошибка при создании пользователя." });
@@ -39,6 +48,7 @@ export const login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
+
     if (!user) {
       return res.json({
         message: "Такого юзера не существует.",
@@ -64,15 +74,15 @@ export const login = async (req, res) => {
     res.json({
       token,
       user,
-      message: "вы вошли в систему.",
+      message: "Вы вошли в систему.",
     });
   } catch (error) {
     res.json({ message: "Ошибка при авторизации." });
   }
 };
 
-// Get me
-export const getme = async (req, res) => {
+// Get Me
+export const getMe = async (req, res) => {
   try {
     const user = await User.findById(req.userId);
 

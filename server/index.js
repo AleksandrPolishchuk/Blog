@@ -34,7 +34,9 @@ app.get("/", (req, res) => {
 
 async function start() {
   try {
-    await mongoose.connect(`path ${DB_USER}:${DB_PASSWORD} ${DB_NAME}`);
+    await mongoose.connect(
+      `mongodb+srv://${DB_USER}:${DB_PASSWORD}@cluster0.q7q7yue.mongodb.net/${DB_NAME}`
+    );
 
     app.listen(PORT, () => console.log(`Server started on port: ${PORT}`));
   } catch (error) {
