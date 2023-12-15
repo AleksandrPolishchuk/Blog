@@ -18,6 +18,8 @@ export const createComment = async (req, res) => {
     } catch (error) {
       console.log(error);
     }
+
+    res.json(newComment);
   } catch (error) {
     res.json({ message: "Что-то пошло не так." });
   }

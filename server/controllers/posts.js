@@ -35,7 +35,7 @@ export const createPost = async (req, res) => {
       username: user.username,
       title,
       text,
-      imgUrl,
+      imgUrl: "",
       author: req.userId,
     });
     await newPostWithoutImage.save();
@@ -53,6 +53,7 @@ export const getAll = async (req, res) => {
   try {
     const posts = await Post.find().sort("-createdAt");
     const popularPosts = await Post.find().limit(5).sort("-views");
+
     if (!posts) {
       return res.json({ message: "Постов нет" });
     }
@@ -63,13 +64,12 @@ export const getAll = async (req, res) => {
   }
 };
 
-// Get By Id
+// Get Post By Id
 export const getById = async (req, res) => {
   try {
-    const post = await Post.findByIdAndUpdate(req.params.Id, {
-      $ins: { views: 1 },
+    const post = await Post.findByIdAndUpdate(req.params.id, {
+      $inc: { views: 1 },
     });
-
     res.json(post);
   } catch (error) {
     res.json({ message: "Что-то пошло не так." });
@@ -85,7 +85,8 @@ export const getMyPosts = async (req, res) => {
         return Post.findById(post._id);
       })
     );
-    res.json(post);
+
+    res.json(list);
   } catch (error) {
     res.json({ message: "Что-то пошло не так." });
   }
