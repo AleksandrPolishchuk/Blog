@@ -5,6 +5,6 @@ import { createComment } from "../controllers/comments.js";
 
 // Create Comment
 // http://localhost:3002/api/comments/:id
-router.podt("/:id", checkAuth, createComment);
+router.post("/:id", checkAuth, createComment);
 
 export default router;
