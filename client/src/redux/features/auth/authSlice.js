@@ -76,7 +76,7 @@ export const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
-    [registerUser.rejected]: (state, action) => {
+    [registerUser.rejectWithValue]: (state, action) => {
       state.status = action.payload.message;
       state.isLoading = false;
     },
@@ -91,7 +91,7 @@ export const authSlice = createSlice({
       state.user = action.payload.user;
       state.token = action.payload.token;
     },
-    [loginUser.rejected]: (state, action) => {
+    [loginUser.rejectWithValue]: (state, action) => {
       state.status = action.payload.message;
       state.isLoading = false;
     },
@@ -106,7 +106,7 @@ export const authSlice = createSlice({
       state.user = action.payload?.user;
       state.token = action.payload?.token;
     },
-    [getMe.rejected]: (state, action) => {
+    [getMe.rejectWithValue]: (state, action) => {
       state.status = action.payload.message;
       state.isLoading = false;
     },
