@@ -36,9 +36,9 @@ export const getPostComments = createAsyncThunk(
 export const commentSlice = createSlice({
   name: "comment",
   initialState,
-  reducres: {},
+  reducers: {},
   extraReducers: {
-    //Create Post
+    // Создание поста
     [createComment.pending]: (state) => {
       state.loading = true;
     },
@@ -49,7 +49,7 @@ export const commentSlice = createSlice({
     [createComment.rejected]: (state) => {
       state.loading = false;
     },
-    // Get PostComments
+    // Получение комментов
     [getPostComments.pending]: (state) => {
       state.loading = true;
     },
