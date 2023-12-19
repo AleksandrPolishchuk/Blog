@@ -54,7 +54,7 @@ export const postSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: {
-    //Create Post
+    // Создание поста
     [createPost.pending]: (state) => {
       state.loading = true;
     },
@@ -65,8 +65,7 @@ export const postSlice = createSlice({
     [createPost.rejected]: (state) => {
       state.loading = false;
     },
-
-    //Get All Posts
+    // Получаение всех постов
     [getAllPosts.pending]: (state) => {
       state.loading = true;
     },
@@ -78,8 +77,7 @@ export const postSlice = createSlice({
     [getAllPosts.rejected]: (state) => {
       state.loading = false;
     },
-
-    //Remove Post
+    // Удаление поста
     [removePost.pending]: (state) => {
       state.loading = true;
     },
@@ -92,8 +90,7 @@ export const postSlice = createSlice({
     [removePost.rejected]: (state) => {
       state.loading = false;
     },
-
-    // Update Post
+    // Обновление поста
     [updatePost.pending]: (state) => {
       state.loading = true;
     },
